@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple HTML webpage">
+    <link rel="stylesheet" href="style.css">
+    <title>Fitness Last - Contacts</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="header-title" style="display: flex; align-items: center;">
+                <span><img src="IMAGES/F.png" alt="Logo" width="80" height="80"></span>
+                <h1 style="color: white; margin-left: 10px; margin: 0;"><b><i>FITNESS LAST</i></b></h1>
+            </div>
+            <div class="header-buttons">
+                <a href="home.html" class="header-button"><b>Home</b></a>
+                <a href="Gallery.html" class="header-button"><b>Gallery</b></a>
+                <a href="Services.html" class="header-button"><b>Services</b></a>
+                <a href="Contacs.html" class="header-button"><b>Contact</b></a>
+            </div>
+
+            <div class="header-buttons1" style="margin-left: auto;">
+                <a href="#" class="header-button1" id="loginBtn"><b>LOG IN</b></a>
+                <span id="usernameDisplay" class="header-button1" style="display:none;"></span>
+                <a href="#" id="signOutBtn" class="header-button1" style="display:none;"><b>SIGN OUT</b></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="content" style="display: flex; justify-content: space-between; padding: 20px;">
+        <div style="flex: 1; padding-right: 20px;">
+            <h2 style="color: red; font-size: 50px; padding: 10px;">Contact Information</h2>
+            <div class="contact-info">
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Phone:</strong><i> +63 942-456-7890</i></p>
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Email:</strong><i> info@fitnesslast.com</i></p>
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Address:</strong><i> Colegio De San Juan De Letran, Intramuros, Manila</i></p>
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Business Hours:</strong><i> 24/7 </i></p>
+                <p style="color: Red; font-size: 30px; padding: 10px"><strong>Social Media:</strong></p>
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Facebook: </strong><i>FintesslastFB</i></p>
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Instagram: </strong><i>FintesslastIG</i></p>
+                <p style="color: white; font-size: 20px; padding: 10px"><strong>Twitter: </strong><i>FintesslastTW</i></p>
+            </div>
+        </div>
+
+        <div style="flex: 1; padding-right: 150px; margin: 20px;">
+            <h3 style="color: white; text-align: center;">Our Location</h3>
+            <iframe
+                width="100%"
+                height="600"
+                frameborder="1"
+                style="border:0; border-radius: 3px;"
+                allowfullscreen
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.09216575685!2d120.97428817594076!3d14.5938237772409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca182cc63319%3A0x87fde2a2049d0222!2sColegio%20de%20San%20Juan%20de%20Letran!5e0!3m2!1sen!2sph!4v1733674027202!5m2!1sen!2sph"></iframe>
+        </div>
+    </main>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" style="display:none;"></div>
+
+    <!-- Login Modal -->
+    <div id="id01" class="modal" style="display:none;">
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <h1>Log In</h1>
+                <p>Please fill in this form to log in.</p>
+                <hr>
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id="username" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+
+                <div id="error-message" style="color:red; text-align:center; display:none;">Incorrect username or password</div>
+
+                <div class="clearfix">
+                    <button type="button" onclick="closeLoginModal()" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="validateLogin()" class="signupbtn">Log In</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Contact Us -->
+    <div style="text-align:center; padding: 20px;">
+        <button onclick="openContactUsModal()" class="contact-us-btn" style="border-radius: 8px;">Contact Us</button>
+    </div>
+
+    <div id="contactModal" class="modal" style="display:none;">
+        <form class="modal-content" onsubmit="submitContactForm(event)">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>Please fill in the form below:</p>
+                <hr>
+
+                <label for="firstName"><b>First Name</b></label>
+                <input type="text" id="firstName" name="firstName" required>
+
+                <label for="lastName"><b>Last Name</b></label>
+                <input type="text" id="lastName" name="lastName" required>
+
+                <label for="email"><b>Email Address</b></label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="comment"><b>Comment</b></label>
+                <textarea id="comment" name="comment" rows="4" placeholder="Enter your message" required style="width: 100%; padding: 15px; margin: 5px 0 22px 0; border: none; background: #f1f1f1; resize: vertical;"></textarea>
+
+                <div class="clearfix">
+                    <button type="button" onclick="closeContactUsModal()" class="cancelbtn">Cancel</button>
+                    <button type="submit" class="signupbtn">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>All rights reserved @FitnessLast</p>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        const correctUsername = 'IIT406';
+        const correctPassword = 'LETRAN';
+
+        var loginModal = document.getElementById('id01');
+        var overlay = document.getElementById('modalOverlay');
+        var loginBtn = document.getElementById('loginBtn');
+        var errorMessage = document.getElementById('error-message');
+        var usernameDisplay = document.getElementById('usernameDisplay');
+        var signOutBtn = document.getElementById('signOutBtn');
+        var contactModal = document.getElementById('contactModal');
+
+        window.onload = function() {
+            var storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                loginBtn.style.display = 'none';
+                usernameDisplay.style.display = 'inline';
+                usernameDisplay.textContent = storedUsername;
+                signOutBtn.style.display = 'inline';
+            }
+        };
+
+        loginBtn.onclick = function() {
+            loginModal.style.display = 'block';
+            overlay.style.display = 'block';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == loginModal || event.target == overlay) {
+                closeLoginModal();
+            }
+
+            if (event.target == contactModal || event.target == overlay) {
+                closeContactUsModal();
+            }
+        };
+
+        function closeLoginModal() {
+            loginModal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function validateLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            if (username === correctUsername && password === correctPassword) {
+                localStorage.setItem('username', username);
+                loginModal.style.display = 'none';
+                overlay.style.display = 'none';
+                loginBtn.style.display = 'none';
+                usernameDisplay.style.display = 'inline';
+                usernameDisplay.textContent = username;
+                signOutBtn.style.display = 'inline';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        signOutBtn.onclick = function() {
+            localStorage.removeItem('username');
+            loginBtn.style.display = 'inline';
+            usernameDisplay.style.display = 'none';
+            signOutBtn.style.display = 'none';
+        };
+
+        function openContactUsModal() {
+            contactModal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closeContactUsModal() {
+            contactModal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            alert("Thank you for reaching out! We'll get back to you shortly.");
+            closeContactUsModal();
+            window.location.href = 'home.html'; 
+        }
+    </script>
+</body>
+</html>

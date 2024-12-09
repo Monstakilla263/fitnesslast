@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gallery page of Fitness Last">
+    <link rel="stylesheet" href="style.css">
+    <title>Fitness Last - Gallery - Calis</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="header-title" style="display: flex; align-items: center;">
+                <span><img src="IMAGES/F.png" alt="Logo" width="80" height="80"></span>
+                <h1 style="color: white; margin-left: 10px; margin: 0;"><b><i>FITNESS LAST</i></b></h1>
+            </div>
+            <div class="header-buttons">
+                <a href="home.html" class="header-button"><b>Home</b></a>
+                <a href="Gallery.html" class="header-button"><b>Gallery</b></a>
+                <a href="Services.html" class="header-button"><b>Services</b></a>
+                <a href="Contacs.html" class="header-button"><b>Contact</b></a>
+            </div>
+
+            <div class="header-buttons1" style="margin-left: auto;">
+                <a href="#" class="header-button1" id="loginBtn"><b>LOG IN</b></a>
+                <span id="usernameDisplay" class="header-button1" style="display:none;"></span>
+                <a href="#" id="signOutBtn" class="header-button1" style="display:none;"><b>SIGN OUT</b></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="carousel">
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+
+            <div class="mySlides fade">
+                <video width="100%" height="auto" controls>
+                    <source src="VIDEOS/Calis1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="mySlides fade">
+                <video width="100%" height="auto" controls>
+                    <source src="VIDEOS/Calis2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="mySlides fade">
+                <video width="100%" height="auto" controls>
+                    <source src="VIDEOS/Calis3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
+        </div>
+
+        <div class="image-container">
+            <div class="text-overlay">
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
+
+        <div id="modalOverlay" class="modal-overlay"></div>
+
+        <div id="id02" class="modal">
+            <form class="modal-content" action="/action_page.php">
+                <div class="container">
+                    <h1>Sign Up</h1>
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    <label for="psw-repeat"><b>Repeat Password</b></label>
+                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                    </label>
+
+                    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('id02').style.display='none'; document.getElementById('modalOverlay').style.display='none'" class="cancelbtn">Cancel</button>
+                        <button type="submit" class="signupbtn">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="id01" class="modal">
+            <form class="modal-content" action="/action_page.php">
+                <div class="container">
+                    <h1>Log In</h1>
+                    <p>Please fill in this form to log in.</p>
+                    <hr>
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" id="username" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+
+                    <div id="error-message" style="color:red; text-align:center; display:none;">Incorrect username or password</div>
+
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'; document.getElementById('modalOverlay').style.display='none'" class="cancelbtn">Cancel</button>
+                        <button type="button" onclick="validateLogin()" class="signupbtn">Log In</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>All rights reserved @FitnessLast</p>
+    </footer>
+
+    <script>
+        const correctUsername = 'IIT406';
+        const correctPassword = 'LETRAN';
+
+        var loginModal = document.getElementById('id01');
+        var registerModal = document.getElementById('id02');
+        var overlay = document.getElementById('modalOverlay');  
+
+        var loginBtn = document.getElementById('loginBtn');
+        
+        var errorMessage = document.getElementById('error-message');
+        
+        var usernameDisplay = document.getElementById('usernameDisplay');
+        var signOutBtn = document.getElementById('signOutBtn');
+
+        window.onload = function() {
+            var storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                loginBtn.style.display = 'none';
+                usernameDisplay.style.display = 'inline';
+                usernameDisplay.textContent = storedUsername;
+                signOutBtn.style.display = 'inline';
+            }
+        };
+
+        loginBtn.onclick = function() {
+            loginModal.style.display = 'block';
+            overlay.style.display = 'block'; 
+        }
+
+        window.onclick = function(event) {
+            if (event.target == loginModal || event.target == registerModal || event.target == overlay) {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+                overlay.style.display = 'none'; 
+            }
+        }
+
+        function validateLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            if (username === correctUsername && password === correctPassword) {
+                loginModal.style.display = 'none';
+                overlay.style.display = 'none';
+                usernameDisplay.style.display = 'inline';
+                usernameDisplay.textContent = username; 
+                signOutBtn.style.display = 'inline';
+                localStorage.setItem('username', username);
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        signOutBtn.onclick = function() {
+            localStorage.removeItem('username');
+            usernameDisplay.style.display = 'none';
+            signOutBtn.style.display = 'none';
+            loginBtn.style.display = 'inline';
+        }
+
+        let slideIndex = 0;
+        showSlides();
+
+        function plusSlides(n) {
+            slideIndex += n;
+            showSlides();
+        }
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            let videos = document.getElementsByTagName("video");
+
+            for (let i = 0; i < videos.length; i++) {
+                videos[i].pause();
+            }
+
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }    
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[slideIndex].style.display = "block";
+        }
+    </script>
+</body>
+</html>

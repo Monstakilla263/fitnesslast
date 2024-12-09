@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple HTML webpage">
+    <link rel="stylesheet" href="style.css">
+    <title>Fitness Last - Membership</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="header-title" style="display: flex; align-items: center;">
+                <span><img src="IMAGES/F.png" alt="Logo" width="80" height="80"></span>
+                <h1 style="color: white; margin-left: 10px; margin: 0;"><b><i>FITNESS LAST</i></b></h1>
+            </div>
+            <div class="header-buttons">
+                <a href="home.html" class="header-button"><b>Home</b></a>
+                <a href="Gallery.html" class="header-button"><b>Gallery</b></a>
+                <a href="Services.html" class="header-button"><b>Services</b></a>
+                <a href="Contacs.html" class="header-button"><b>Contact</b></a>
+            </div>
+
+            <div class="header-buttons1" style="margin-left: auto;">
+                <a href="#" class="header-button1" id="loginBtn"><b>LOG IN</b></a>
+                <span id="usernameDisplay" class="header-button1" style="display:none;"></span>
+                <a href="#" id="signOutBtn" class="header-button1" style="display:none;"><b>SIGN OUT</b></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="service-boxes">
+            <div class="service-box">
+                <h2>BRONZE</h2>
+                <img src="IMAGES/mem1.jpg" alt="Trulli" class="responsive-image" style="width: 500px; height: 300px; border-radius: 10px;">
+                <p>The basic membership offering access to essential gym facilities like cardio equipment, weight machines, and general workout areas. Ideal for beginners or those with a limited budget, and it offers bonuses such as access to showers and lockers.</p>
+                <button class="service-button" id="hireBtnJames" onclick="handleServiceClick('hireCoach', 'hireBtnJames')">BUY</button>
+            </div>
+            <div class="service-box">
+                <h2>SILVER</h2>
+                <img src="IMAGES/mem2.jpg" alt="Trulli" class="responsive-image" style="width: 500px; height: 300px;  border-radius: 10px;">
+                <p>Includes all Bronze benefits, plus additional perks like access to group fitness classes, premium equipment, and possibly limited use of spa or wellness areas. A good option for regular gym-goers seeking variety in their workouts.</p>
+                <button class="service-button" id="hireBtnJamaica" onclick="handleServiceClick('hireCoach', 'hireBtnJamaica')">BUY</button>
+            </div>
+            <div class="service-box">
+                <h2>GOLD</h2>
+                <img src="IMAGES/mem3.jpg" alt="Trulli" class="responsive-image" style="width: 500px; height: 300px;  border-radius: 10px;">
+                <p>The top-tier membership offering full access to all gym amenities, including exclusive classes, personal training sessions, priority booking for services, and access to spa and relaxation areas. Perfect for committed fitness enthusiasts seeking a comprehensive experience.</p>
+                <button class="service-button" id="hireBtnLeroy" onclick="handleServiceClick('hireCoach', 'hireBtnLeroy')">BUY</button>
+            </div>
+        </div>
+
+        <div id="modalOverlay" class="modal-overlay"></div>
+
+        <div id="id02" class="modal">
+            <form class="modal-content" action="/action_page.php">
+                <div class="container">
+                    <h1>Sign Up</h1>
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    <label for="psw-repeat"><b>Repeat Password</b></label>
+                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                    </label>
+
+                    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('id02').style.display='none'; document.getElementById('modalOverlay').style.display='none'" class="cancelbtn">Cancel</button>
+                        <button type="submit" class="signupbtn">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="id01" class="modal">
+            <form class="modal-content" action="/action_page.php">
+                <div class="container">
+                    <h1>Log In</h1>
+                    <p>Please fill in this form to log in.</p>
+                    <hr>
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" id="username" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+
+                    <div id="error-message" style="color:red; text-align:center; display:none;">Incorrect username or password</div>
+
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'; document.getElementById('modalOverlay').style.display='none'" class="cancelbtn">Cancel</button>
+                        <button type="button" onclick="validateLogin()" class="signupbtn">Log In</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p></p>
+    </footer>
+
+    <script>
+        function handleServiceClick(action, buttonId) {
+            const button = document.getElementById(buttonId);
+            if (button.textContent === "BUY") {
+                button.textContent = "BOUGHT";
+                button.style.backgroundColor = "green";
+            } else {
+                button.textContent = "BUY";
+                button.style.backgroundColor = "";
+            }
+        }
+
+        const correctUsername = 'IIT406';
+        const correctPassword = 'LETRAN';
+
+        var loginModal = document.getElementById('id01');
+        var registerModal = document.getElementById('id02');
+        var overlay = document.getElementById('modalOverlay');  
+
+        var loginBtn = document.getElementById('loginBtn');
+        
+        var errorMessage = document.getElementById('error-message'); 
+        
+        var usernameDisplay = document.getElementById('usernameDisplay');
+        var signOutBtn = document.getElementById('signOutBtn');
+
+        window.onload = function() {
+            var storedUsername = localStorage.getItem('username');
+            if (storedUsername) {
+                loginBtn.style.display = 'none';
+                usernameDisplay.style.display = 'inline';
+                usernameDisplay.textContent = storedUsername;
+                signOutBtn.style.display = 'inline';
+            }
+        };
+
+        loginBtn.onclick = function() {
+            loginModal.style.display = 'block';
+            overlay.style.display = 'block'; 
+        }
+
+        function validateLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            if (username === correctUsername && password === correctPassword) {
+                alert("Login successful!");
+                document.getElementById('id01').style.display = 'none';
+                document.getElementById('modalOverlay').style.display = 'none';
+                errorMessage.style.display = 'none';
+
+                loginBtn.style.display = 'none';
+                usernameDisplay.style.display = 'inline';
+                usernameDisplay.textContent = username;
+
+                localStorage.setItem('username', username);
+
+                signOutBtn.style.display = 'inline';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        signOutBtn.onclick = function() {
+            localStorage.removeItem('username');
+            loginBtn.style.display = 'inline';
+            usernameDisplay.style.display = 'none';
+            signOutBtn.style.display = 'none';
+        };
+
+        document.getElementById('username').addEventListener('input', function() {
+            errorMessage.style.display = 'none';
+        });
+        document.getElementById('password').addEventListener('input', function() {
+            errorMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
